@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <h1>This is the Home Page.</h1>
+    <!-- <h2>Welcome - {{name|capfirst}}</h2> -->
+    <h2>Welcome - {{name|title|truncatechars:5}}</h2>
+
+    <!-- {% if posts %} {% for post in posts %}
+    <h2>{{post.title}}</h2>
+    <p>{{post.content}}</p>
+    {% endfor %} {% elif posts|length == 0 %}
+    <h2>Inside Elif</h2>
+    {% else %}
+    <h2>No posts available</h2>
+    {% endif %} -->
+
+    {% for post in posts %}
+    <!-- <a href="/posts/{{post.id}}"
+      ><h2>{{forloop.counter}} - {{post.title|title}}</h2></a
+    > -->
+
+    <a href="{% url 'specific_post' post.id %}"
+      ><h2>{{forloop.counter}} - {{post.title|title}}</h2></a
+    >
+    <p>{{post.content|truncatewords:2}}</p>
+    {% empty %}
+    <h2>No post is avilable</h2>
+    {% endfor %}
+  </body>
+</html>
