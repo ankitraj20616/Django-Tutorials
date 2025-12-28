@@ -1,8 +1,9 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path("home/", views.home),
+    path("home/", views.home, name= "home"),
     path("<int:id>/", views.post, name= "specific_post"),
     path("google/", views.visitGoogle),
     path("redirect/<int:id>/", views.redirectPost),
+    path("global/", views.globalTemplate),
 ]

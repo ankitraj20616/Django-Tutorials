@@ -19,6 +19,7 @@ posts = [
         "content": "JavaScript is for frontend devlopment."
     }
 ]
+# posts = []
 
 # Create your views here.
 
@@ -30,7 +31,8 @@ def home(request: HttpRequest)-> HttpResponse:
             <p>{post.get("content")}</p>
             <br/>
         """
-    return HttpResponse(html)
+    name = "ankit raj"
+    return render(request, 'posts/home.html', {"name": name, "posts": posts})
 
 def post(request: HttpRequest, id: int)-> HttpResponse:
     resp_dict = None
@@ -44,10 +46,14 @@ def post(request: HttpRequest, id: int)-> HttpResponse:
         <h1>{resp_dict["id"]} - {resp_dict["title"]}</h1>
         <p>{resp_dict["content"]}</p>
     """
-    return HttpResponse(html)
+    # return HttpResponse(html)
+    return render(request, "posts/post.html", {"post": resp_dict})
 
 def visitGoogle(request: HttpRequest)-> HttpResponseRedirect:
     return HttpResponseRedirect("https://www.google.com")
 
 def redirectPost(request: HttpRequest, id: int)-> HttpResponseRedirect:
     return HttpResponseRedirect(reverse('specific_post', args=[id]))
+
+def globalTemplate(request: HttpRequest):
+    return render(request, 'global.html')
